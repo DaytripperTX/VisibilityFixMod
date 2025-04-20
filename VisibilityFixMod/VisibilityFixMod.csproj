@@ -16,9 +16,6 @@
     <Reference Include="UnityEngine.JSONSerializeModule">
       <HintPath>E:\SteamLibrary\steamapps\common\Schedule I\Schedule I_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/Schedule I_Data/Managed/UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
     <Reference Include="0Harmony">
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/net35/0Harmony.dll</HintPath>
     </Reference>

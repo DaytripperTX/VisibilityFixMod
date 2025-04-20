@@ -1,5 +1,4 @@
 ﻿using MelonLoader;
-using UnityEngine;
 
 [assembly: MelonInfo(typeof(VisibilityFixMod.VisibilityFix), "VisibilityFix", "0.1.0", "volcomtx")]
 [assembly: MelonGame("TVGS", "Schedule I")]
@@ -17,15 +16,6 @@ namespace VisibilityFixMod
 
             if(Config.EnableDebugLogs)
                 LoggerInstance.Msg("Debug Logs Enabled");
-        }
-
-        public override void OnUpdate()
-        {
-            //Used for debugging purposes
-            if (Input.GetKeyDown(KeyCode.F1)) 
-            {
-                MelonLogger.Msg("F1 key was pressed!");
-            }
         }
     }
 }
