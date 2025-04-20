@@ -10,7 +10,7 @@ namespace VisibilityFixMod.Patches
         {
             static bool Prefix(ref float __result)
             {
-                __result = 10f; // Minimum visibility
+                __result = Config.MaxVisibility; // Minimum visibility
                 return false;  // Skip the original method
             }
         }

@@ -10,14 +10,16 @@ namespace VisibilityFixMod
     {
         public override void OnApplicationStart()
         {
+            Config.Load();
             var harmony = new HarmonyLib.Harmony("com.visibilityfix");
             harmony.PatchAll();
-            LoggerInstance.Msg("Visibility Fix Mod loaded and Harmony patched.");
+            LoggerInstance.Msg($"Visibility Fix loaded. MaxVisibility = {Config.MaxVisibility}");
         }
 
         public override void OnUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.F1))
+            //Used for debugging purposes
+            if (Input.GetKeyDown(KeyCode.F1)) 
             {
                 MelonLogger.Msg("F1 key was pressed!");
             }
