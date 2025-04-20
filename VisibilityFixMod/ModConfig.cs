@@ -10,6 +10,7 @@ namespace VisibilityFixMod
         private static readonly string configPath = Path.Combine(ModDirectory, "VisibilityFixConfig.json");
 
         public static float MaxVisibility = 30f; // default
+        public static bool EnableDebugLogs = false;
 
         public static void Load()
         {
@@ -18,6 +19,7 @@ namespace VisibilityFixMod
                 string json = File.ReadAllText(configPath);
                 var cfg = JsonUtility.FromJson<ConfigData>(json);
                 MaxVisibility = cfg.MaxVisibility;
+                EnableDebugLogs = cfg.EnableDebugLogs;
             }
             else
             {
@@ -27,7 +29,11 @@ namespace VisibilityFixMod
 
         public static void Save()
         {
-            var data = new ConfigData { MaxVisibility = MaxVisibility };
+            var data = new ConfigData
+            {
+                MaxVisibility = MaxVisibility,
+                EnableDebugLogs = EnableDebugLogs
+            };
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(configPath, json);
         }
@@ -36,6 +42,7 @@ namespace VisibilityFixMod
         public class ConfigData
         {
             public float MaxVisibility = 30f;
+            public bool EnableDebugLogs = false;
         }
     }
 }

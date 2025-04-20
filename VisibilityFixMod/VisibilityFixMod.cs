@@ -14,6 +14,9 @@ namespace VisibilityFixMod
             var harmony = new HarmonyLib.Harmony("com.visibilityfix");
             harmony.PatchAll();
             LoggerInstance.Msg($"Visibility Fix loaded. MaxVisibility = {Config.MaxVisibility}");
+
+            if(Config.EnableDebugLogs)
+                LoggerInstance.Msg("Debug Logs Enabled");
         }
 
         public override void OnUpdate()

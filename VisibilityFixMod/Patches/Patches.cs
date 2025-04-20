@@ -25,7 +25,7 @@ namespace VisibilityFixMod.Patches
             [HarmonyPrefix]
             static void Prefix(ScheduleOne.Stealth.PlayerVisibility __instance)
             {
-                if (!LogRateLimiter.CanLog("PreVisibility", 0.5f))
+                if (!Config.EnableDebugLogs || !LogRateLimiter.CanLog("PreVisibility", 0.5f))
                     return;
 
                 if (__instance.activeAttributes == null)
@@ -41,7 +41,7 @@ namespace VisibilityFixMod.Patches
             [HarmonyPostfix]
             static void Postfix(float __result)
             {
-                if (LogRateLimiter.CanLog("PostVisibility", 0.5f))
+                if (Config.EnableDebugLogs && LogRateLimiter.CanLog("PostVisibility", 0.5f))
                 {
                     Msg($"[Debug] Final Visibility Score (after clamp): {__result}");
                 }
