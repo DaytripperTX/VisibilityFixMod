@@ -6,17 +6,17 @@ using static MelonLoader.MelonLogger;
 namespace VisibilityFixMod.Patches
 {
     class Patches
-    {/*
-        [HarmonyPatch(typeof(ScheduleOne.Stealth.PlayerVisibility))] 
-        [HarmonyPatch("CalculateVisibility")]                  
+    {
+        [HarmonyPatch(typeof(ScheduleOne.Stealth.PlayerVisibility))]
+        [HarmonyPatch("CalculateVisibility")]
         class VisibilityPatch
         {
             static bool Prefix(ref float __result)
             {
-                __result = Config.MaxVisibility; // Minimum visibility
+                __result = Config.MaxVisibility;
                 return false;  // Skip the original method
             }
-        }*/
+        }
 
         [HarmonyPatch(typeof(ScheduleOne.Stealth.PlayerVisibility), "CalculateVisibility")]
         public static class DebugVisibility
