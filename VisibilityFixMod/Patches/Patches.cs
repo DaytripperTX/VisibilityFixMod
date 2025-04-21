@@ -1,24 +1,103 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using static MelonLoader.MelonLogger;
+using System.Linq;
+using ScheduleOne.Stealth;
+using ScheduleOne.Vision;
 
 
 namespace VisibilityFixMod.Patches
 {
     class Patches
     {
-        [HarmonyPatch(typeof(ScheduleOne.Stealth.PlayerVisibility))]
+        [HarmonyPatch(typeof(PlayerVisibility))]
         [HarmonyPatch("CalculateVisibility")]
         class VisibilityPatch
         {
-            static bool Prefix(ref float __result)
+            static bool Prefix(PlayerVisibility __instance, ref float __result)
             {
-                __result = Config.MaxVisibility;
-                return false;  // Skip the original method
+                var attrs = __instance.activeAttributes;
+                if (attrs == null)
+                {
+                    __result = 0f;
+                    return false;
+                }
+
+                if (Config.EnableDebugLogs)
+                {
+                    Msg("[DEBUG] Raw activeAttributes:");
+                    foreach (var attr in attrs)
+                    {
+                        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
+                    }
+                }
+
+                // Step 1: Filter unique-max attributes by uniquenessCode
+                var uniqueMax = attrs
+                    .OfType<UniqueVisibilityAttribute>()
+                    .GroupBy(a => a.uniquenessCode)
+                    .Select(group => group.OrderByDescending(a => a.pointsChange).First())
+                    .ToDictionary(attr => attr.uniquenessCode, attr => attr.pointsChange);
+
+                // Step 2: Rebuild filtered attribute list
+                var filtered = attrs
+                    .Where(attr =>
+                    {
+                        if (attr is UniqueVisibilityAttribute uniqueAttr)
+                        {
+                            return uniqueMax.TryGetValue(uniqueAttr.uniquenessCode, out float max) &&
+                                   uniqueAttr.pointsChange >= max;
+                        }
+                        return true;
+                    })
+                    .ToList();
+
+                if (Config.EnableDebugLogs)
+                {
+                    Msg("[DEBUG] Filtered activeAttributes (after uniqueness logic):");
+                    foreach (var attr in filtered)
+                    {
+                        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
+                    }
+                }
+
+                // Step 3: Apply contribution logic
+                float visibility = 0f;
+
+                foreach (var attr in filtered)
+                {
+                    float contribution = attr.pointsChange;
+                    string name = attr.name.ToLowerInvariant();
+
+                    //base visibility
+                    if (name.Contains("base visibility"))
+                        contribution = Config.BaseVisibility;
+
+                    //multipliers
+                    if (name.Contains("sneaky"))
+                        contribution *= Config.ActiveMultipliers.Sneaky;
+
+                    if (name.Contains("crouched"))
+                        contribution *= Config.ActiveMultipliers.Crouched;
+
+                    if (Config.FlashlightAffectsSneak && name.Contains("flashlight"))
+                        contribution *= Config.ActiveMultipliers.Flashlight;
+
+                    visibility += contribution;
+                }
+
+                __result = Mathf.Clamp(visibility, 0f, Config.MaxVisibility);
+
+                if (Config.EnableDebugLogs)
+                {
+                    Msg($"[DEBUG] Final calculated visibility: {__result}");
+                }
+
+                return false;
             }
         }
 
-        [HarmonyPatch(typeof(ScheduleOne.Stealth.PlayerVisibility), "CalculateVisibility")]
+        [HarmonyPatch(typeof(PlayerVisibility), "CalculateVisibility")]
         public static class DebugVisibility
         {
             //Debug method: Tells us the total visibility score of a player
