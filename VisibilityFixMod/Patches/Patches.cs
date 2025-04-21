@@ -81,11 +81,14 @@ namespace VisibilityFixMod.Patches
                     if (name.Contains("crouched"))
                         multiplier = Config.ActiveMultipliers.Crouched;
 
-                    if (name.Contains("flashlight") && name.Contains("on"))
+                    if (name.Contains("flashlight"))
                     {
                         multiplier = Config.FlashlightAffectsSneak
                             ? Config.ActiveMultipliers.Flashlight
                             : 1f;
+
+                        if (!Config.FlashlightAffectsSneak)
+                            points = 0f;
                     }
 
 
@@ -110,7 +113,7 @@ namespace VisibilityFixMod.Patches
                 return false;
             }
         }
-
+        
         [HarmonyPatch(typeof(PlayerVisibility), "CalculateVisibility")]
         public static class DebugVisibility
         {
