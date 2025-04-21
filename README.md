@@ -9,7 +9,7 @@
 
 ## 📌 Description
 
-This mod overhauls the way **player visibility** is calculated in *Schedule I*, offering more precise control and improving stealth mechanics. Rather than relying on the game’s hardcoded visibility clamp, this mod provides a configurable system for adjusting how individual visibility attributes affect detection.
+This mod overhauls the way **player visibility** is calculated in *Schedule I*, offering more precise control and improving stealth mechanics.
 
 It is fully compatible with **IL2CPP builds** of the game.
 
@@ -31,8 +31,7 @@ It is fully compatible with **IL2CPP builds** of the game.
 
 ## 🔧 Configuration
 
-When the game is run with the mod for the first time, a config file will be created here:
-`<game folder>/Mods/VisibilityFixConfig.json`
+When the game is run with the mod for the first time, a config file will be createdin the games `Mods` folder.
 
 You can modify the following settings:
 
@@ -67,6 +66,6 @@ To help tune the config, enable `EnableDebugLogs`. This will output:
 ## 📦 Installation
 
 1. Install [MelonLoader](https://melonwiki.xyz/#/?id=installation) for **IL2CPP**.
-2. Drop `VisibilityFix.dll` into the game's `Mods` folder: `<game folder>/Mods/VisibilityFix.dll`
+2. Drop `VisibilityFix.dll` into the game's `Mods` folder
 3. Run the game. Edit the generated config file if desired.
 4. Optionally view the console log or `MelonLoader/Latest.log` for debug output.
