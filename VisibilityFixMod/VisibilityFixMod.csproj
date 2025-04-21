@@ -14,13 +14,13 @@
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/Schedule I_Data/Managed/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>E:\SteamLibrary\steamapps\common\Schedule I\Schedule I_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/Schedule I_Data/Managed/UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
     <Reference Include="0Harmony">
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/net35/0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>E:\SteamLibrary\steamapps\common\Schedule I\Schedule I_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/Schedule I_Data/Managed/Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
