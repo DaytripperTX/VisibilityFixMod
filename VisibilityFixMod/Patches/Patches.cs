@@ -66,24 +66,38 @@ namespace VisibilityFixMod.Patches
 
                 foreach (var attr in filtered)
                 {
-                    float contribution = attr.pointsChange;
+                    float points = attr.pointsChange;
+                    float multiplier = attr.multiplier;
                     string name = attr.name.ToLowerInvariant();
 
                     //base visibility
                     if (name.Contains("base visibility"))
-                        contribution = Config.BaseVisibility;
+                        points = Config.BaseVisibility;
 
-                    //multipliers
+                    // Override multiplier with config-defined values
                     if (name.Contains("sneaky"))
-                        contribution *= Config.ActiveMultipliers.Sneaky;
+                        multiplier = Config.ActiveMultipliers.Sneaky;
 
                     if (name.Contains("crouched"))
-                        contribution *= Config.ActiveMultipliers.Crouched;
+                        multiplier = Config.ActiveMultipliers.Crouched;
 
-                    if (Config.FlashlightAffectsSneak && name.Contains("flashlight"))
-                        contribution *= Config.ActiveMultipliers.Flashlight;
+                    if (name.Contains("flashlight") && name.Contains("on"))
+                    {
+                        multiplier = Config.FlashlightAffectsSneak
+                            ? Config.ActiveMultipliers.Flashlight
+                            : 1f;
+                    }
 
-                    visibility += contribution;
+
+                    visibility += points;
+
+                    if (multiplier != 1f)
+                        visibility *= multiplier;
+
+                    if (Config.EnableDebugLogs)
+                    {
+                        Msg($"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
+                    }
                 }
 
                 __result = Mathf.Clamp(visibility, 0f, Config.MaxVisibility);
