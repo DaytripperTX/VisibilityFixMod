@@ -8,6 +8,7 @@ using Il2CppScheduleOne.Vision;
 
 namespace VisibilityFixMod.Patches
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used by Harmony via reflection")]
     class Patches
     {
         [HarmonyPatch(typeof(PlayerVisibility))]
@@ -35,11 +36,12 @@ namespace VisibilityFixMod.Patches
                 DebugUtil.LogBlock(
                     "RawAttrs",
                     "[DEBUG] Raw activeAttributes:",
-                    attrs.Select(attr => $"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}")
+                    attrs.ToArray().Select(attr => $"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}")
                 );
 
                 // Step 1: Filter unique-max attributes by uniquenessCode
                 var uniqueMax = attrs
+                    .ToArray() //Fix for LINQ
                     .OfType<UniqueVisibilityAttribute>()
                     .GroupBy(a => a.uniquenessCode)
                     .Select(group => group.OrderByDescending(a => a.pointsChange).First())
@@ -47,6 +49,7 @@ namespace VisibilityFixMod.Patches
 
                 // Step 2: Rebuild filtered attribute list
                 var filtered = attrs
+                    .ToArray()
                     .Where(attr =>
                     {
                         if (attr is UniqueVisibilityAttribute uniqueAttr)
