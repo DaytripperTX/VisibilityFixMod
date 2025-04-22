@@ -7,7 +7,7 @@ namespace VisibilityFixMod
 {
     public class VisibilityFix : MelonMod
     {
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
             Config.Load();
             var harmony = new HarmonyLib.Harmony("com.visibilityfix");
