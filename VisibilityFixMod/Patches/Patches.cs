@@ -2,8 +2,8 @@
 using UnityEngine;
 using static MelonLoader.MelonLogger;
 using System.Linq;
-using ScheduleOne.Stealth;
-using ScheduleOne.Vision;
+using Il2CppScheduleOne.Stealth;
+using Il2CppScheduleOne.Vision;
 
 
 namespace VisibilityFixMod.Patches
@@ -23,14 +23,20 @@ namespace VisibilityFixMod.Patches
                     return false;
                 }
 
-                if (Config.EnableDebugLogs)
-                {
-                    Msg("[DEBUG] Raw activeAttributes:");
-                    foreach (var attr in attrs)
-                    {
-                        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
-                    }
-                }
+                //if (Config.EnableDebugLogs)
+                //{
+                //    Msg("[DEBUG] Raw activeAttributes:");
+                //    foreach (var attr in attrs)
+                //    {
+                //        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
+                //    }
+                //}
+
+                DebugUtil.LogBlock(
+                    "RawAttrs",
+                    "[DEBUG] Raw activeAttributes:",
+                    attrs.Select(attr => $"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}")
+                );
 
                 // Step 1: Filter unique-max attributes by uniquenessCode
                 var uniqueMax = attrs
@@ -52,14 +58,20 @@ namespace VisibilityFixMod.Patches
                     })
                     .ToList();
 
-                if (Config.EnableDebugLogs)
-                {
-                    Msg("[DEBUG] Filtered activeAttributes (after uniqueness logic):");
-                    foreach (var attr in filtered)
-                    {
-                        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
-                    }
-                }
+                //if (Config.EnableDebugLogs)
+                //{
+                //    Msg("[DEBUG] Filtered activeAttributes (after uniqueness logic):");
+                //    foreach (var attr in filtered)
+                //    {
+                //        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
+                //    }
+                //}
+
+                DebugUtil.LogBlock(
+                    "FilteredAttrs",
+                    "[DEBUG] Filtered activeAttributes (after uniqueness logic):",
+                    filtered.Select(attr => $"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}")
+                );
 
                 // Step 3: Apply contribution logic
                 float visibility = 0f;
@@ -97,23 +109,27 @@ namespace VisibilityFixMod.Patches
                     if (multiplier != 1f)
                         visibility *= multiplier;
 
-                    if (Config.EnableDebugLogs)
-                    {
-                        Msg($"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
-                    }
+                    //if (Config.EnableDebugLogs)
+                    //{
+                    //    Msg($"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
+                    //}
+
+                   // DebugUtil.Log("AttrRunningTotal", $"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
                 }
 
                 __result = Mathf.Clamp(visibility, 0f, Config.MaxVisibility);
 
-                if (Config.EnableDebugLogs)
-                {
-                    Msg($"[DEBUG] Final calculated visibility: {__result}");
-                }
+                //if (Config.EnableDebugLogs)
+                //{
+                //    Msg($"[DEBUG] Final calculated visibility: {__result}");
+                //}
+
+                DebugUtil.Log("FinalVis", $"[DEBUG] Final calculated visibility: {__result}");
 
                 return false;
             }
         }
-        
+     /*   
         [HarmonyPatch(typeof(PlayerVisibility), "CalculateVisibility")]
         public static class DebugVisibility
         {
@@ -142,7 +158,7 @@ namespace VisibilityFixMod.Patches
                     Msg($"[Debug] Final Visibility Score (after clamp): {__result}");
                 }
             }
-        }
+        }*/
     }
 }
 

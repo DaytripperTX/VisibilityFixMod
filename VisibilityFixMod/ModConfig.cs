@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using static MelonLoader.MelonLogger;
-using Newtonsoft.Json;
+using Il2CppNewtonsoft.Json;
 
 namespace VisibilityFixMod
 {
@@ -55,9 +55,9 @@ namespace VisibilityFixMod
 
     public class MultiplierSettings
     {
-        public float Sneaky = 0.6f;
-        public float Crouched = 0.8f;
-        public float Flashlight = 1.5f;
+        public float Sneaky = 0.3f;
+        public float Crouched = 0.6f;
+        public float Flashlight = 1.2f;
     }
 
     public class ConfigData
