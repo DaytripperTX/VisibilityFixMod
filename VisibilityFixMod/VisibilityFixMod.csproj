@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <ResolvePackageFileConflictsEnabled>false</ResolvePackageFileConflictsEnabled>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MelonLoader">
@@ -18,7 +19,7 @@
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/net6/0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/Il2CppAssemblies/Il2CppNewtonsoft.Json.dll</HintPath>
+      <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/net6/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/Il2CppAssemblies/Il2Cppmscorlib.dll</HintPath>
