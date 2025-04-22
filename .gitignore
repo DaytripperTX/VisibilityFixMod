@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /VisibilityFixMod/_postbuild_log.txt
+/VisibilityFixMod/VisibilityFixMod.csproj.bkp
