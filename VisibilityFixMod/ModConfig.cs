@@ -13,8 +13,8 @@ namespace VisibilityFixMod
 
         public static bool EnableDebugLogs = false;
         public static bool FlashlightAffectsSneak = true;
-        public static float BaseVisibility = 60f;
-        public static float MaxVisibility = 60f;
+        public static float BaseVisibility = 100f;
+        public static float MaxVisibility = 100f;
 
         public static MultiplierSettings[] Multipliers = new[] { new MultiplierSettings() };
 
@@ -67,8 +67,8 @@ namespace VisibilityFixMod
     {
         public bool EnableDebugLogs = false;
         public bool FlashlightAffectsSneak = true;
-        public float BaseVisibility = 60f;
-        public float MaxVisibility = 60f;
+        public float BaseVisibility = 100f;
+        public float MaxVisibility = 100f;
 
         public MultiplierSettings[] Multipliers = new[] { new MultiplierSettings() };
     }
