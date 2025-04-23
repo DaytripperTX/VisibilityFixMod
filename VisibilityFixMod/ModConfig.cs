@@ -1,11 +1,9 @@
 ﻿using System.IO;
-using System.Reflection;
 using static MelonLoader.MelonLogger;
 using Newtonsoft.Json;
 using MelonLoader;
 using MelonLoader.Utils;
 using System;
-using System.Linq;
 
 namespace VisibilityFixMod
 {

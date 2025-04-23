@@ -1,6 +1,4 @@
 ﻿using MelonLoader;
-using System;
-using ModManagerPhoneApp;
 
 [assembly: MelonInfo(typeof(VisibilityFixMod.VisibilityFix), "VisibilityFix", "0.4.0", "volcomtx")]
 [assembly: MelonGame("TVGS", "Schedule I")]
