@@ -38,20 +38,7 @@ namespace VisibilityFixMod
                 Save(); // create file on first run
             }
 
-            bool isModManagerAvailable = AppDomain.CurrentDomain.GetAssemblies()
-            .Any(assembly => assembly.GetName().Name == "ModManager&PhoneApp");
-
-            if (isModManagerAvailable || true)
-            {
-                var category = MelonPreferences.CreateCategory("VisibilityFix", "Main Settings");
-                category.CreateEntry("EnableDebugLogs", Config.EnableDebugLogs);
-                category.CreateEntry("FlashlightAffectsSneak", Config.FlashlightAffectsSneak);
-                category.CreateEntry("BaseVisibility", Config.BaseVisibility);
-                category.CreateEntry("MaxVisibility", Config.MaxVisibility);
-                // Add entries for Multipliers later
-
-
-            }
+            ModManagerIntegration.Initialize();
         }
 
         public static void HandleSettingsUpdate()

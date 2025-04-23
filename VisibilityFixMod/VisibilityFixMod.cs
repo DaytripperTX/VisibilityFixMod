@@ -16,21 +16,14 @@ namespace VisibilityFixMod
             harmony.PatchAll();
             LoggerInstance.Msg($"Visibility Fix loaded. MaxVisibility = {Config.MaxVisibility}");
 
-            if(Config.EnableDebugLogs)
+            if (Config.EnableDebugLogs)
                 LoggerInstance.Msg("Debug Logs Enabled");
+        }
 
-            try
-            {
-                ModManagerPhoneApp.ModSettingsEvents.OnPreferencesSaved += Config.HandleSettingsUpdate;
-                LoggerInstance.Msg("Successfully subscribed to Mod Manager save event.");
-            }
-            catch (Exception ex)
-            {
-                LoggerInstance.Warning($"Could not subscribe to Mod Manager event (Mod Manager may not be installed/compatible): {ex.Message}");
-            }
+        public override void OnDeinitializeMelon()
+        {
+            ModManagerIntegration.Deinitialize();
         }
 
     }
-
-
-    }
+}
