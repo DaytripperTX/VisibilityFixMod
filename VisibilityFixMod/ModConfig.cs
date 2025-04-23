@@ -2,13 +2,14 @@
 using System.Reflection;
 using static MelonLoader.MelonLogger;
 using Newtonsoft.Json;
+using MelonLoader;
+using MelonLoader.Utils;
 
 namespace VisibilityFixMod
 {
     public static class Config
     {
-        private static readonly string ModDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        private static readonly string configPath = Path.Combine(ModDirectory, "VisibilityFixConfig.json");
+        private static readonly string configPath = Path.Combine(MelonEnvironment.UserDataDirectory, "VisibilityFixConfig.json");
 
         public static bool EnableDebugLogs = false;
         public static bool FlashlightAffectsSneak = true;

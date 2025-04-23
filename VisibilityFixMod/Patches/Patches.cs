@@ -8,6 +8,7 @@ using ScheduleOne.Vision;
 
 namespace VisibilityFixMod.Patches
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used by Harmony via reflection")]
     class Patches
     {
         [HarmonyPatch(typeof(PlayerVisibility))]
