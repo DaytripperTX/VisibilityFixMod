@@ -1,6 +1,6 @@
 ﻿using MelonLoader;
 
-[assembly: MelonInfo(typeof(VisibilityFixMod.VisibilityFix), "VisibilityFix", "0.4.0", "volcomtx")]
+[assembly: MelonInfo(typeof(VisibilityFixMod.VisibilityFix), "VisibilityFix", "1.0.4", "volcomtx")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 
 namespace VisibilityFixMod
