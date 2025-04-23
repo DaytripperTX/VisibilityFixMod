@@ -33,5 +33,8 @@
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/MelonLoader/net6/Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="ModManagerPhoneApp">
+      <HintPath>E:\SteamLibrary\steamapps\common\Schedule I\Mods\ModManagerPhoneApp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
