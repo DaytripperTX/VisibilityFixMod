@@ -22,5 +22,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>E:/SteamLibrary/steamapps/common/Schedule I/Schedule I_Data/Managed/Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ModManagerPhoneApp">
+      <HintPath>E:\SteamLibrary\steamapps\common\Schedule I\Mods\ModManagerPhoneApp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

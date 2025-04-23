@@ -4,6 +4,8 @@ using static MelonLoader.MelonLogger;
 using Newtonsoft.Json;
 using MelonLoader;
 using MelonLoader.Utils;
+using System;
+using System.Linq;
 
 namespace VisibilityFixMod
 {
@@ -34,6 +36,43 @@ namespace VisibilityFixMod
             else
             {
                 Save(); // create file on first run
+            }
+
+            bool isModManagerAvailable = AppDomain.CurrentDomain.GetAssemblies()
+            .Any(assembly => assembly.GetName().Name == "ModManager&PhoneApp");
+
+            if (isModManagerAvailable || true)
+            {
+                var category = MelonPreferences.CreateCategory("VisibilityFix", "Main Settings");
+                category.CreateEntry("EnableDebugLogs", Config.EnableDebugLogs);
+                category.CreateEntry("FlashlightAffectsSneak", Config.FlashlightAffectsSneak);
+                category.CreateEntry("BaseVisibility", Config.BaseVisibility);
+                category.CreateEntry("MaxVisibility", Config.MaxVisibility);
+                // Add entries for Multipliers later
+
+
+            }
+        }
+
+        public static void HandleSettingsUpdate()
+        {
+            try
+            {
+                // Reload values from ModManager entries
+                EnableDebugLogs = MelonPreferences.GetEntryValue<bool>("VisibilityFix", "EnableDebugLogs");
+                FlashlightAffectsSneak = MelonPreferences.GetEntryValue<bool>("VisibilityFix", "FlashlightAffectsSneak");
+                BaseVisibility = MelonPreferences.GetEntryValue<float>("VisibilityFix", "BaseVisibility");
+                MaxVisibility = MelonPreferences.GetEntryValue<float>("VisibilityFix", "MaxVisibility");
+
+                // Log (optional)
+                Msg("[DEBUG] Settings updated via Mod Manager.");
+
+                // Save to config file
+                Save();
+            }
+            catch (Exception ex)
+            {
+                Msg($"[ERROR] Failed to apply updated settings: {ex.Message}");
             }
         }
 
