@@ -1,20 +1,20 @@
 ﻿using System.IO;
-using System.Reflection;
 using static MelonLoader.MelonLogger;
 using Newtonsoft.Json;
+using MelonLoader;
+using MelonLoader.Utils;
 using System;
 
 namespace VisibilityFixMod
 {
     public static class Config
     {
-        private static readonly string ModDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        private static readonly string configPath = Path.Combine(ModDirectory, "VisibilityFixConfig.json");
+        private static readonly string configPath = Path.Combine(MelonEnvironment.UserDataDirectory, "VisibilityFixConfig.json");
 
         public static bool EnableDebugLogs = false;
         public static bool FlashlightAffectsSneak = true;
-        public static float BaseVisibility = 100f;
-        public static float MaxVisibility = 100f;
+        public static float BaseVisibility = 60f;
+        public static float MaxVisibility = 60f;
 
         public static MultiplierSettings[] Multipliers = new[] { new MultiplierSettings() };
 
@@ -35,6 +35,8 @@ namespace VisibilityFixMod
             {
                 Save(); // create file on first run
             }
+
+            ModManagerIntegration.Initialize();
         }
 
         public static void Save()
@@ -54,7 +56,6 @@ namespace VisibilityFixMod
         public static MultiplierSettings ActiveMultipliers => Multipliers.Length > 0 ? Multipliers[0] : new MultiplierSettings();
     }
 
-    [Serializable]
     public class MultiplierSettings
     {
         public float Sneaky = 0.3f;
@@ -62,13 +63,12 @@ namespace VisibilityFixMod
         public float Flashlight = 1.2f;
     }
 
-    [Serializable]
     public class ConfigData
     {
         public bool EnableDebugLogs = false;
         public bool FlashlightAffectsSneak = true;
-        public float BaseVisibility = 100f;
-        public float MaxVisibility = 100f;
+        public float BaseVisibility = 60f;
+        public float MaxVisibility = 60f;
 
         public MultiplierSettings[] Multipliers = new[] { new MultiplierSettings() };
     }
