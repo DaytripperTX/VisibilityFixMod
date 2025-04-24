@@ -24,15 +24,6 @@ namespace VisibilityFixMod.Patches
                     return false;
                 }
 
-                //if (Config.EnableDebugLogs)
-                //{
-                //    Msg("[DEBUG] Raw activeAttributes:");
-                //    foreach (var attr in attrs)
-                //    {
-                //        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
-                //    }
-                //}
-
                 DebugUtil.LogBlock(
                     "RawAttrs",
                     "[DEBUG] Raw activeAttributes:",
@@ -60,15 +51,6 @@ namespace VisibilityFixMod.Patches
                         return true;
                     })
                     .ToList();
-
-                //if (Config.EnableDebugLogs)
-                //{
-                //    Msg("[DEBUG] Filtered activeAttributes (after uniqueness logic):");
-                //    foreach (var attr in filtered)
-                //    {
-                //        Msg($"[DEBUG]   {attr.name} | +{attr.pointsChange}, x{attr.multiplier}");
-                //    }
-                //}
 
                 DebugUtil.LogBlock(
                     "FilteredAttrs",
@@ -116,23 +98,16 @@ namespace VisibilityFixMod.Patches
                     //{
                     //    Msg($"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
                     //}
-
-                   // DebugUtil.Log("AttrRunningTotal", $"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
                 }
 
                 __result = Mathf.Clamp(visibility, 0f, Config.MaxVisibility);
-
-                //if (Config.EnableDebugLogs)
-                //{
-                //    Msg($"[DEBUG] Final calculated visibility: {__result}");
-                //}
 
                 DebugUtil.Log("FinalVis", $"[DEBUG] Final calculated visibility: {__result}");
 
                 return false;
             }
         }
-     /*   
+        /*
         [HarmonyPatch(typeof(PlayerVisibility), "CalculateVisibility")]
         public static class DebugVisibility
         {
