@@ -59,6 +59,9 @@ namespace VisibilityFixMod.Patches
                 );
 
                 // Step 3: Apply contribution logic
+                System.Text.StringBuilder debugOutput = new System.Text.StringBuilder();
+                debugOutput.AppendLine("[DEBUG] Visibility Attribute Contributions:"); //used for debug
+
                 float visibility = 0f;
 
                 foreach (var attr in filtered)
@@ -94,15 +97,16 @@ namespace VisibilityFixMod.Patches
                     if (multiplier != 1f)
                         visibility *= multiplier;
 
-                    //if (Config.EnableDebugLogs)
-                    //{
-                    //    Msg($"[DEBUG] Attr: {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
-                    //}
+                    // Accumulate the log entry for this iteration
+                    debugOutput.AppendLine($"[DEBUG]   {attr.name} | +{points}, x{multiplier}, Running Total: {visibility}");
+
                 }
+
+                DebugUtil.Log("AttrLoop", debugOutput.ToString());
 
                 __result = Mathf.Clamp(visibility, 0f, Config.MaxVisibility);
 
-                DebugUtil.Log("FinalVis", $"[DEBUG] Final calculated visibility: {__result}");
+                DebugUtil.Log("FinalVis", $"[DEBUG] Final calculated visibility (after clamping): {__result}");
 
                 return false;
             }
